@@ -9,6 +9,7 @@ import org.springframework.mock.web.MockHttpSession;
 
 import com.example.domain.CartItem;
 import com.example.domain.Order;
+import com.example.domain.OrderItem;
 import com.example.domain.User;
 
 public class SessionUtil {
@@ -46,15 +47,49 @@ public class SessionUtil {
 		user.setTelephone("テスト電話番号");
 		sessionMap.put("user", user);
 		
-		Order order = new Order();
+		CartItem cart = new CartItem();
 		List<CartItem> cartItemlist = new ArrayList<>();
-		
-//		sessionMap.put("orderItemList",order.setOrderItemList(list));	
-		sessionMap.put("cartItemList", order);// List<CartItem>
+		cart.setItemId(1);
+		cart.setName("カレー");
+		cart.setItemPrice(300);
+		cart.setSize("M");
+		cart.setSubTotal(300);
+		sessionMap.put("cartItemList", cart);// List<CartItem>
 		sessionMap.put("totalPrice", 1000);
 		return createMockHttpSession(sessionMap);
 	}
 
+	public static MockHttpSession createUserIdAndOrderCompletionSession() {
+		Map<String, Object> sessionMap = new LinkedHashMap<String, Object>();
+		User user = new User();
+		user.setId(1);
+		user.setName("テストユーザ");
+		user.setEmail("test@gmail.com");
+		user.setPassword("testpassword");
+		user.setZipcode("1111111");
+		user.setAddress("テスト住所");
+		user.setTelephone("テスト電話番号");
+		sessionMap.put("user", user);
+		
+		CartItem cart = new CartItem();
+		List<CartItem> cartItemlist = new ArrayList<>();
+		cart.setItemId(1);
+		cart.setName("カレー");
+		cart.setItemPrice(300);
+		cart.setSize("M");
+		sessionMap.put("cartItemList", cart);// List<CartItem>
+		sessionMap.put("totalPrice", 1000);
+		
+//		Order order = new Order();
+//		List<OrderItem> orderitemList = new ArrayList<>();
+//		order.setOrderDate();
+//		order.setDeliveryTime(1200);
+//		order.setDestinationZipcode("123-2401");
+		
+		return createMockHttpSession(sessionMap);
+	}
+
+	
 //	Order order = new Order();
 //	List<OrderItem> orderItemList = new ArrayList<>();
 //	order.setOrderItemList(orderItemList);	

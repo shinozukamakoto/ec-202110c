@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -79,18 +78,14 @@ class TwoStepVerificationControllerTest {
 		assertNull(checkPass);
 	}
 
-	//	@Test
-	//	@DisplayName("入力されたメールアドレスに送信（エラー）")
-	//	@DatabaseSetup("/User/insert_01/expected")
-	//	void testMailSend01() throws Exception {
-	//		MvcResult mvcResult = mockMvc.perform(post("/mailsend")
-	//				.param("email", "yamada@example.com"))
-	//				.andExpect(view().name("redirect:/passCheck"))
-	//				.andReturn();
-	//		MockHttpSession session = (MockHttpSession) mvcResult.getRequest().getSession();
-	//		String email = (String) session.getAttribute("email");
-	//		assertEquals("yamada@example.com", email);
-	//	}
+	@Test
+	@DisplayName("入力されたメールアドレスに送信（失敗")
+	@DatabaseSetup("/User/insert_01/expected")
+	void testMailSend01() throws Exception {
+		MvcResult mvcResult = mockMvc.perform(post("/mailsend"))
+				.andExpect(view().name("/insert/mail_insert"))
+				.andReturn();
+	}
 
 	@Test
 	@DisplayName("入力されたメールアドレスに送信（成功")
@@ -100,9 +95,6 @@ class TwoStepVerificationControllerTest {
 				.param("mail", "yamada@example.com"))
 				.andExpect(view().name("redirect:/passCheck"))
 				.andReturn();
-		MockHttpSession session = (MockHttpSession) mvcResult.getRequest().getSession();
-		String email = (String) session.getAttribute("mail");
-		assertEquals("yamada@example.com", email);
 	}
 
 	@Test
@@ -125,30 +117,28 @@ class TwoStepVerificationControllerTest {
 	@Test
 	@DisplayName("ユーザー登録画面への遷移（emailcheck=null）")
 	void testCheck01() throws Exception {
-		mockMvc.perform(get("/check")
-				.param("emailCheck", ""))
-				.andExpect(view().name("redirect:/mailInsert"));
+		mockMvc.perform(get("/check"))
+				.andExpect(view().name("redirect:/mailInsert"))
+				.andReturn();
 	}
 
 	@Test
-	@DisplayName("ユーザー登録画面への遷移（message=OK）")
+	@DisplayName("ユーザー登録画面への遷移（emailcheck=ok,message=OK）")
 	void testCheck02() throws Exception {
 		MockHttpSession userSession = SessionUtil.createUserIdAndUserSession();
 		mockMvc.perform(get("/check")
 				.session(userSession)
-				.param("numPass", "OK"))
+				.param("passCheck", "OK"))
 				.andExpect(view().name("redirect:/insert"));
 	}
 
 	@Test
-	@DisplayName("ユーザー登録画面への遷移（エラー）")
+	@DisplayName("ユーザー登録画面への遷移（emailcheck=ok,message=NG）")
 	void testCheck03() throws Exception {
 		MockHttpSession userSession = SessionUtil.createUserIdAndUserSession();
 		mockMvc.perform(get("/check")
 				.session(userSession)
-				.param("numPass","NG"))
+				.param("passCheck", "NG"))
 				.andExpect(view().name("/insert/pass_check"));
-		//		.andExpect(model().hasErrors());
 	}
-
 }
