@@ -81,9 +81,9 @@ class InsertControllerTest {
 	@Test
 	@DisplayName("ユーザー登録(異常系)toInsertメソッドのemailがnull")
 	void test2() throws Exception {
-		 MockHttpSession userEmailSession = SuperSessionUtil.nullEmailSession();
+		 //MockHttpSession userEmailSession = SuperSessionUtil.nullEmailSession();
 		 MvcResult mvcResult = mockMvc.perform(post("/insert")
-				 .session(userEmailSession)
+		 //		 .session(userEmailSession)
 				 ).andExpect(view().name("redirect:/mailInsert"))
 				 .andReturn();
 	}
@@ -101,9 +101,9 @@ class InsertControllerTest {
 	@Test
 	@DisplayName("ユーザー登録(異常系)insertメソッドのemailがnull")
 	void test4() throws Exception {
-		MockHttpSession userEmailSession = SuperSessionUtil.nullEmailSession();
+		//MockHttpSession userEmailSession = SuperSessionUtil.nullEmailSession();
 		 MvcResult mvcResult = mockMvc.perform(post("/insert/insertUser")
-				 .session(userEmailSession)
+		//		 .session(userEmailSession)
 				 ).andExpect(view().name("redirect:/mailInsert"))
 				 .andReturn();
 	}
