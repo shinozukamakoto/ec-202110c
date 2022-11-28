@@ -66,6 +66,7 @@ public class TwoStepVerificationController {
 		return "redirect:/passCheck";
 	}
 	
+	//メールアドレス確認
 	@RequestMapping("/passCheck")
 	public String passCheck() {
 		String emailcheck = (String) session.getAttribute("emailcheck");
@@ -88,7 +89,7 @@ public class TwoStepVerificationController {
 		if(session.getAttribute("emailcheck") == null) {
 			return "redirect:/mailInsert";
 		}
-		
+			
 		String message =  userService.checkpass(form.getPassCheck());
 		
 		String email = (String) session.getAttribute("emailcheck");
