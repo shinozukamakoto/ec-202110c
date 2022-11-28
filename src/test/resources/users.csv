@@ -1,0 +1,4 @@
+id,name,email,password,zipcode,address,telephone
+1,テストユーザー,"
+curry@gmail.com",1111111,1111111,テスト住所,テスト番号
+2,山田太郎,yamada@example.com,abcd1234,111-1111,東京都新宿区,080-0000-0000
