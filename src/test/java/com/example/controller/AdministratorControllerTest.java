@@ -107,7 +107,7 @@ class AdministratorControllerTest {
 	@DatabaseSetup("/Administrator/insert_02/expected")
 	void test5() throws Exception {		
 		 MvcResult mvcResult = mockMvc.perform(post("/insertAdministrator/insertAd")
-	                .param("name", "鈴木一郎")
+	                .param("name", "鈴木次郎")
 	                .param("email", "suzuki@example.com")
 	                .param("password", "Abcd1234")
 	                .param("confirmPassword", "Abcd1234")
@@ -160,8 +160,8 @@ class AdministratorControllerTest {
 		 MockHttpSession companyIdSession = SuperSessionUtil.companyIdSession();
 		 MvcResult mvcResult = mockMvc.perform(post("/insertAdministrator/toAdLogin")
 				 .session(companyIdSession)
+				 .param("password", "morimori")
                  .param("email", "tanaka@example.com")
-                 .param("password", "Abcd1234")
 				 ).andExpect(view().name("forward:/admiShowList"))
 				 .andReturn();
 	}
