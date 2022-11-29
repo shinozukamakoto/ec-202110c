@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ec202110c
+    username: postgres
+    password: postgres
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: on99.matsunaga.dai@gmail.com
+    password: rlbfppgjhxfsaymf
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+server:
+  servlet:
+    context-path: /ec-202110c
