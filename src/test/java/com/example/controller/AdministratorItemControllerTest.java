@@ -44,6 +44,8 @@ import com.example.util.CsvDataSetLoader;
 import com.example.util.SessionUtil;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 
 @SpringBootTest
@@ -101,8 +103,8 @@ class AdministratorItemControllerTest {
 	        Item item1 = itemList.get(0);
 	        Item item2 = itemList.get(itemList.size()-1);
 	        assertAll(
-	    			() -> assertEquals("カツカレー", item1.getName()),
-	    			() -> assertEquals("とんかつカレーラーメン", item2.getName())
+	    			() -> assertEquals("ポークポークカレー・ミート", item1.getName()),
+	    			() -> assertEquals("ほうれん草のカレードリア", item2.getName())
 	    		);
 	        //18件あり1ページにつき5件表示させる場合→1,2,3、4がpageNumbersに入る
 	        
@@ -169,34 +171,32 @@ class AdministratorItemControllerTest {
 	       }
 	 	        
 	 	   @Test
-	 	   @DisplayName("論理削除（UPDATE items SET deleted = true>商品編集画面に遷移）")
+	 	   @DisplayName("論理削除（UPDATE items SET deleted = true>=csv 商品編集画面に遷移）")
+	 	   @ExpectedDatabase(value = "/item", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	 	   void admiDelete() throws Exception {
 	 		  MvcResult mvcResult = mockMvc.perform(get("/admiDelete")
 	 	                .param("id","1"))
 	 	        		.andExpect(view().name("redirect:/admiShowList"))
 	 	                .andReturn();
 	 		  
-	 		 ModelAndView mav = mvcResult.getModelAndView();
-	 		userDataMapper.deleteById(Long.valueOf("2+"));
-	 		assertEquals
 				
 			 }
 	 	   
 	 	  @Test
-	 	  @DisplayName("エラーが存在する場合にはコンソールに「aaa」と出力し、商品更新画面に遷移")
+	 	  @DisplayName("エラーが存在する場合には、商品更新画面に遷移")
 	 	  void admiUpdate1() throws Exception {
 	 		 mockMvc.perform(get("/admiUpdate")
-	 	        	.param("name", "ビーフカレー")
+	 	        	.param("name", "")
 	 	            .param("description", ""))
 	 	        	.andExpect(view().name("showItemDetail"));
 	 		  
 	 	  }
 	 	  
-	 	  @Test
-	 	  @DisplayName("画像をファイルに保存できるか")
+	 	  /*@Test
+	 	 @DisplayName("画像をファイルに保存できるか")
 	 	  void admiUpdate2() throws Exception {
 	 		
-	 	  }
+	 	  }*/
 
 
 }
