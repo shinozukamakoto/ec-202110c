@@ -90,8 +90,9 @@ class CartControllerTest {
 				.andExpect(view().name("redirect:/showCart")).andReturn();
 
 		MockHttpSession session = (MockHttpSession) mvcResult.getRequest().getSession();
-		String inCart = (String) session.getAttribute("cartItemList");
-		assertEquals("cartItemList", inCart);
+		List<CartItem> cartItemList = (List<CartItem>) session.getAttribute("cartItemList");
+		CartItem cartItem = cartItemList.get(0);
+		assertEquals("cutletcurry", cartItem.getName());
 
 	}
 
