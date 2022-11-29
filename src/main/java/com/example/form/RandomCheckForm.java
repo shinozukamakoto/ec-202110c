@@ -9,7 +9,7 @@ public class RandomCheckForm {
 	@Email(message="メールアドレスの形式が不正です")
 	private String mail;
 	private String passCheck;
-	
+
 	public String getMail() {
 		return mail;
 	}
@@ -26,6 +26,6 @@ public class RandomCheckForm {
 	public String toString() {
 		return "RandomCheckForm [mail=" + mail + ", passCheck=" + passCheck + "]";
 	}
-	
-	
+
+
 }

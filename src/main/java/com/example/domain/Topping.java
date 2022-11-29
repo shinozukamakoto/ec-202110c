@@ -2,7 +2,7 @@ package com.example.domain;
 
 /**
  * トッピングのドメイン
- * 
+ *
  * @author naramasato
  *
  */
@@ -16,10 +16,10 @@ public class Topping {
 	private Integer priceM;
 	//Lサイズ時の価格
 	private Integer priceL;
-	
+
 	//コンストラクター
 	public Topping() {}
-	
+
 	public Topping(Integer id, String name, Integer priceM, Integer priceL) {
 		super();
 		this.id = id;
@@ -66,6 +66,6 @@ public class Topping {
 	public String toString() {
 		return "Topping [id=" + id + ", name=" + name + ", priceM=" + priceM + ", priceL=" + priceL + "]";
 	}
-	
-	
+
+
 }

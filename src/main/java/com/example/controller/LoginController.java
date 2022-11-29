@@ -20,27 +20,27 @@ import com.example.service.UserService;
 @Controller
 @RequestMapping("")
 public class LoginController {
-	
-	
+
+
 	@Autowired
 	private UserService service;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 
 	@ModelAttribute
 	public LoginForm setUpLoginForm() {
 		LoginForm loginForm = new LoginForm();
 		return loginForm;//リクエストパラメーターにloginFormが格納された
 	}
-	
-	
+
+
 	@RequestMapping("/toLogin")
 	public String toLogin() {
 		return "login/login";
 	}
-	
+
 	@RequestMapping("/login")
 	public String  login(LoginForm form,Model model) {
 		System.out.println(form);
@@ -50,23 +50,23 @@ public class LoginController {
 			model.addAttribute("loginError", "メールアドレス、またはパスワードが間違っています");
 			return toLogin();//RequestMappingのアドレスを指定
 		}
-		
+
 		session.setAttribute("user",user);
-		
+
 		@SuppressWarnings("unchecked")
 		List<CartItem> cartItemList = (List<CartItem>) session.getAttribute("cartItemList");
-		
+
 		if(cartItemList == null || cartItemList.size() == 0) {
 			return "forward:/showList";
 		} else {
 			return "redirect:/orderCo";
 		}
 	}
-	
+
 	@RequestMapping("/logout")
 	public String logout() {
 		session.invalidate();
 		return "forward:/showList";
 	}
-	
+
 }

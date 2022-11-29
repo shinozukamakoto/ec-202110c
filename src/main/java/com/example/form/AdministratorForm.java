@@ -1,7 +1,6 @@
 package com.example.form;
 
 import javax.validation.constraints.Email;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -26,9 +25,9 @@ public class AdministratorForm {
 	//確認用パスワード
 	@NotBlank(message="確認用パスワードを入力して下さい")
 	private String confirmPassword;
-	
-	
-	
+
+
+
 	//ゲッターセッター
 	public String getName() {
 		return name;
@@ -54,7 +53,7 @@ public class AdministratorForm {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
+
 	//toStringのオーバーライド
 	@Override
 	public String toString() {

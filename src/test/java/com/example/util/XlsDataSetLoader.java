@@ -1,4 +1,4 @@
-package com.example.ecommerce_a.util;
+package com.example.util;
 
 
 import java.io.IOException;
@@ -10,7 +10,7 @@ import org.springframework.core.io.Resource;
 
 import com.github.springtestdbunit.dataset.AbstractDataSetLoader;
 
-public class XlsDataSetLoader extends AbstractDataSetLoader { 
+public class XlsDataSetLoader extends AbstractDataSetLoader {
 
     @Override
     protected IDataSet createDataSet(Resource resource) throws IOException, DataSetException {

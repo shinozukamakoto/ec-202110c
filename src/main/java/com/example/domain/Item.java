@@ -23,12 +23,12 @@ public class Item {
 	private Boolean deleted;
 	/** トッピングリスト */
 	private List<Topping> toppingList;
-	
-	
+
+
 	/** 引数なし */
 	public Item() {
 	}
-	
+
 	/** 引数あり */
 	public Item(Integer id, String name, String description, Integer priceM, Integer priceL, String imagePath,
 			Boolean deleted, List<Topping> toppingList) {
@@ -100,7 +100,7 @@ public class Item {
 	}
 
 	public List<Topping> getToppingList() {
-		return toppingList; 
+		return toppingList;
 	}
 
 	public void setToppingList(List<Topping> toppingList) {
@@ -112,6 +112,6 @@ public class Item {
 		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", priceM=" + priceM + ", priceL="
 				+ priceL + ", imagePath=" + imagePath + ", deleted=" + deleted + ", toppingList=" + toppingList + "]";
 	}
-	
-	
+
+
 }

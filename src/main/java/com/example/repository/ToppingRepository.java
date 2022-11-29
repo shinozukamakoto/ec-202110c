@@ -11,17 +11,17 @@ import com.example.domain.Topping;
 
 /**
  * トッピングのripository
- * 
+ *
  * @author naramasato
  *
  */
 @Repository
 public class ToppingRepository {
-	
+
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
-	private static final RowMapper<Topping> TOPPING_ROW_MAPPER 
+	private static final RowMapper<Topping> TOPPING_ROW_MAPPER
 	= (rs,i) -> {
 				Topping topping = new Topping();
 				topping.setId(rs.getInt("id"));
@@ -30,10 +30,10 @@ public class ToppingRepository {
 				topping.setPriceL(rs.getInt("price_l"));
 				return topping;
 			};
-			
+
 	/**
 	 * トッピングを全件探す
-	 * 
+	 *
 	 * @return 検索されたトッピングテーブルの情報
 	 */
 	public List<Topping> findAllTopping(){
@@ -41,5 +41,5 @@ public class ToppingRepository {
 		List<Topping> toppingList = template.query(findAllToppingSql, TOPPING_ROW_MAPPER);
 		return toppingList;
 	}
-			
+
 }

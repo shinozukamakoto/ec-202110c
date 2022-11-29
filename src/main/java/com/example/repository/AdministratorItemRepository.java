@@ -17,7 +17,7 @@ public class AdministratorItemRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
 	private static final RowMapper<Item> ITEM_ROW_MAPPER = (rs,i) -> {
 		Item item = new Item();
 		item.setId(rs.getInt("id"));
@@ -29,7 +29,7 @@ public class AdministratorItemRepository {
 		item.setDeleted(rs.getBoolean("deleted"));
 		return item;
 	};
-	
+
 	/**
 	 * 最大のIDを取得
 	 * @return
@@ -54,7 +54,7 @@ public class AdministratorItemRepository {
 				+ " VALUES (:id, :name, :description, :priceM, :priceL, :imagePath, 'f');";
 		template.update(sql, param);
 	}
-	
+
 	/**
 	 * 商品編集画面を表示
 	 */
@@ -64,7 +64,7 @@ public class AdministratorItemRepository {
 		Item item = template.queryForObject(sql, param, ITEM_ROW_MAPPER);
 		return item;
 	}
-	
+
 	/**
 	 * 商品の削除
 	 * @param item
@@ -74,7 +74,7 @@ public class AdministratorItemRepository {
 		String sql = "UPDATE items SET deleted = true WHERE id = :id;";
 		template.update(sql, param);
 	}
-	
+
 	/**
 	 * 商品の編集
 	 * @param item

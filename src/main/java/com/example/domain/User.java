@@ -1,6 +1,6 @@
 package com.example.domain;
 /**
- * 
+ *
  * @author satakemisako
  * ユーザー情報のドメインクラス
  *
@@ -21,8 +21,8 @@ public class User {
 	private String address;
 	//電話番号
 	private String telephone;
-	
-	
+
+
 	//引数ありコンストラクタ
 	public User(Integer id, String name, String password, String email, String zipcode, String address,
 			String telephone) {
@@ -37,7 +37,7 @@ public class User {
 	}
 	//引数なしコンストラクタ
 	public User() {}
-	
+
 	//以下getter及びsetter
 	public String getEmail() {
 		return email;
@@ -87,7 +87,7 @@ public class User {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", zipcode="
 				+ zipcode + ", address=" + address + ", telephone=" + telephone + "]";
 	}
-	
-	
-	
+
+
+
 }

@@ -10,12 +10,12 @@ public class AdministratorLoginForm {
 	//管理者登録パスワード
 	private String password;
 	//管理者登録メールアドレス
-	
+
 	private String email;
 	//企業ID
 	private String companyId;
-	
-	
+
+
 	@Override
 	public String toString() {
 		return "AdministratorInsertForm [password=" + password + ", email=" + email + ", companyId=" + companyId + "]";
@@ -50,8 +50,8 @@ public class AdministratorLoginForm {
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
 	}
-	
-	
-	
-	
+
+
+
+
 }

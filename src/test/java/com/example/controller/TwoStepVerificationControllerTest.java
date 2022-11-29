@@ -23,8 +23,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.example.ecommerce_a.util.CsvDataSetLoader;
-import com.example.ecommerce_a.util.SessionUtil;
+import com.example.util.CsvDataSetLoader;
+import com.example.util.HyperSessionUtil;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
@@ -63,7 +63,7 @@ class TwoStepVerificationControllerTest {
 	@Test
 	@DisplayName("メールアドレス入力")
 	void testMailInsert() throws Exception {
-		MockHttpSession emailCheckSession = SessionUtil.createUserIdAndUserSession();
+		MockHttpSession emailCheckSession = HyperSessionUtil.createUserIdAndUserSession();
 		MvcResult mvcResult = mockMvc.perform(get("/mailInsert")
 				.session(emailCheckSession))
 				.andExpect(view().name("/insert/mail_insert"))
@@ -82,7 +82,7 @@ class TwoStepVerificationControllerTest {
 	@DisplayName("入力されたメールアドレスに送信（失敗")
 	@DatabaseSetup("/User/insert_01/expected")
 	void testMailSend01() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(post("/mailsend"))
+		mockMvc.perform(post("/mailsend"))
 				.andExpect(view().name("/insert/mail_insert"))
 				.andReturn();
 	}
@@ -91,7 +91,7 @@ class TwoStepVerificationControllerTest {
 	@DisplayName("入力されたメールアドレスに送信（成功")
 	@DatabaseSetup("/User/insert_01/expected")
 	void testMailSend02() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(post("/mailsend")
+		mockMvc.perform(post("/mailsend")
 				.param("mail", "yamada@example.com"))
 				.andExpect(view().name("redirect:/passCheck"))
 				.andReturn();
@@ -108,7 +108,7 @@ class TwoStepVerificationControllerTest {
 	@Test
 	@DisplayName("メールアドレス確認(確認）")
 	void testPassCheck02() throws Exception {
-		MockHttpSession userSession = SessionUtil.createUserIdAndUserSession();
+		MockHttpSession userSession = HyperSessionUtil.createUserIdAndUserSession();
 		mockMvc.perform(get("/passCheck")
 				.session(userSession))
 				.andExpect(view().name("/insert/pass_check"));
@@ -125,7 +125,7 @@ class TwoStepVerificationControllerTest {
 	@Test
 	@DisplayName("ユーザー登録画面への遷移（emailcheck=ok,message=OK）")
 	void testCheck02() throws Exception {
-		MockHttpSession userSession = SessionUtil.createUserIdAndUserSession();
+		MockHttpSession userSession = HyperSessionUtil.createUserIdAndUserSession();
 		mockMvc.perform(get("/check")
 				.session(userSession)
 				.param("passCheck", "OK"))
@@ -135,7 +135,7 @@ class TwoStepVerificationControllerTest {
 	@Test
 	@DisplayName("ユーザー登録画面への遷移（emailcheck=ok,message=NG）")
 	void testCheck03() throws Exception {
-		MockHttpSession userSession = SessionUtil.createUserIdAndUserSession();
+		MockHttpSession userSession = HyperSessionUtil.createUserIdAndUserSession();
 		mockMvc.perform(get("/check")
 				.session(userSession)
 				.param("passCheck", "NG"))

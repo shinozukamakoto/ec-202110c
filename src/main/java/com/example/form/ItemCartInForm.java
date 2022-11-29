@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @author satakemisako
- * 
+ *
  * ショッピングカートに商品追加するためのフォームクラス
  *
  */
@@ -18,7 +18,7 @@ public class ItemCartInForm {
 	private Integer priceM;
 	//Lサイズの本体の値段
 	private Integer priceL;
-	
+
 	//トッピングのリスト作成用のインデックス
 	private List<String> toppingIndex;
 	//数量
@@ -27,9 +27,9 @@ public class ItemCartInForm {
 	private Integer id;
 	//image
 	private String imagePath;
-	
-	
-	
+
+
+
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -66,8 +66,8 @@ public class ItemCartInForm {
 	public void setToppingIndex(List<String> toppingIndex) {
 		this.toppingIndex = toppingIndex;
 	}
-	
-	
+
+
 	public Integer getQuantity() {
 		return quantity;
 	}

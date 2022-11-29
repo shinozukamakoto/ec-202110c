@@ -63,6 +63,7 @@ id serial primary key
 , order_id integer not null
 , quantity integer not null
 , size varchar(1)
+, sub_total integer not null
 ) ;
 
 -- 注文トッピング

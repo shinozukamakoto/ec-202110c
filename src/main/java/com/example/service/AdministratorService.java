@@ -15,24 +15,21 @@ public class AdministratorService {
 
 	@Autowired
 	private AdministratorRepository repository;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	
+
+
 	public Administrator loginAdministrator(String password, String email) {
 		Administrator administrator = repository.findByMailAddress(email);
-		
-		if (administrator == null) {
-			return null;
-		}
+
 		// パスワードが不一致だった場合はnullを返す
-		if (!passwordEncoder.matches(password, administrator.getPassword())) {
+		if ((administrator == null) || !passwordEncoder.matches(password, administrator.getPassword())) {
 			return null;
 		}
 		return administrator;
 	}
-	
+
 	/**
 	 * ユーザー登録を行う。
 	 * @param user
@@ -41,5 +38,5 @@ public class AdministratorService {
 		administrator.setPassword(passwordEncoder.encode(administrator.getPassword()));
 		repository.insertAdministrator(administrator);
 	}
-	
+
 }

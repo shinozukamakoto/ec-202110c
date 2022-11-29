@@ -1,4 +1,4 @@
-package com.example.ecommerce_a.util;
+package com.example.util;
 
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.csv.CsvDataSet;

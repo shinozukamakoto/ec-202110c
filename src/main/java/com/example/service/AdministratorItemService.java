@@ -13,7 +13,7 @@ public class AdministratorItemService {
 
 	@Autowired
 	private AdministratorItemRepository repository;
-	
+
 	/**
 	 * 新しいIDの取得
 	 * @return
@@ -21,7 +21,7 @@ public class AdministratorItemService {
 	public Integer getId() {
 		return repository.getPrimaryId();
 	}
-	
+
 	/**
 	 * 商品の登録
 	 * @param item
@@ -29,7 +29,7 @@ public class AdministratorItemService {
 	public void insert(Item item) {
 		repository.insert(item);
 	}
-	
+
 	/**
 	 * 商品編集画面を表示
 	 * @param id
@@ -46,7 +46,7 @@ public class AdministratorItemService {
 	public void delete(Integer id) {
 		repository.delete(id);
 	}
-	
+
 	public void update(Item item) {
 		repository.update(item);
 	}

@@ -18,7 +18,7 @@ import com.example.repository.AdministratorRepository;
 
 /**
  * ログイン後の管理者情報に権限情報を付与するサービスクラス.
- * 
+ *
  * @author daimastunaga
  *
  */
@@ -31,7 +31,7 @@ public class AdministratorDetailsServiceImpl implements UserDetailsService {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.springframework.security.core.userdetails.UserDetailsService#
 	 * loadUserByUsername(java.lang.String) DBから検索をし、ログイン情報を構成して返す。
 	 */

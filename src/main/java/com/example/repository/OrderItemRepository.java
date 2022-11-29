@@ -19,13 +19,13 @@ import com.example.domain.OrderItem;
  */
 @Repository
 public class OrderItemRepository {
-	
+
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
 //	private static final RowMapper<OrderItemRepository> ORDER_ITEM_ROW_MAPPER
 //		 = new BeanPropertyRowMapper<>(OrderItemRepository.class);
-	
+
 	/**
 	 * order_itemsにINSERTする
 	 * @param orderItem
@@ -33,16 +33,16 @@ public class OrderItemRepository {
 	 */
 	public Integer order(OrderItem orderItem) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(orderItem);
-		
+
 		String sql = "INSERT INTO order_items(item_id, order_id, quantity, size, sub_total) "
 				+ "VALUES(:itemId, :orderId, :quantity, :size, :subTotal)";
-		
+
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		String[] keyColumnNames = {"id"};
 		template.update(sql, param, keyHolder, keyColumnNames);
-		
+
 		orderItem.setId(keyHolder.getKey().intValue());
-		
+
 		return orderItem.getId();
 	}
 }

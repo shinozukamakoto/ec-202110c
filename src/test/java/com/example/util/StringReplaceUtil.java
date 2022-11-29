@@ -1,4 +1,4 @@
-package com.example.ecommerce_a.util;
+package com.example.util;
 
 import java.io.File;
 import java.io.IOException;
