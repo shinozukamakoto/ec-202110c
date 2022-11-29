@@ -52,7 +52,6 @@ class OrderControlerTest {
 	void tearDown() throws Exception {
 	}
 
-
 	@Test
 	@DisplayName("注文確認画面への遷移（ログイン情報確認成功）")
 	void testToOrder01() throws Exception {
@@ -74,7 +73,9 @@ class OrderControlerTest {
 	void testOrderCompletion01() throws Exception{
 		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/order")
-				.session(userAndOrderSession))
+				.session(userAndOrderSession)
+				.param("orderDate","2019-05-01")
+				.param("deliveryTime","10"))
 				.andExpect(view().name("redirect:/orderCompletion"));
 	}
 
@@ -84,7 +85,7 @@ class OrderControlerTest {
 		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/order")
 				.session(userAndOrderSession)
-				.param("orderDate","2019/04/01"))
+				.param("orderDate","2019-04-01"))
 				.andExpect(view().name("/order/order_confirm"));
 	}
 
