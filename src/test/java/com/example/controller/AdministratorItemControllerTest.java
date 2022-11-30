@@ -170,8 +170,8 @@ class AdministratorItemControllerTest {
   		
 	       }
 	 	        
-	 	   @Test
-	 	   @DisplayName("論理削除（UPDATE items SET deleted = true>=csv 商品一覧画面に遷移）")
+	       @Test
+	 	   @DisplayName("論理削除（UPDATE items SET deleted = true>=csv 商品編集画面に遷移）")
 	 	   @ExpectedDatabase(value = "/item", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	 	   void admiDelete() throws Exception {
 	 		  MvcResult mvcResult = mockMvc.perform(get("/admiDelete")
