@@ -15,6 +15,7 @@ create table users (
 --ユーザー登録(pass:morimori)
 insert into users(name, email, password, zipcode, address, telephone) values('テストユーザ', 'test@test.co.jp', '$2a$10$Utoo6nr3XIFEh4xOZ9Zr1.n/PtEYBb8HhlLDDklaJwsj.T3uux4kq','1111111', 'テスト住所', 'テスト電話番号');
 
+
 -- 商品
 drop table if exists items cascade;
 
@@ -46,6 +47,7 @@ insert into items values(15, 'Family４', 'ラクラクカレー自慢「特う�
 insert into items values(16, 'シンプルイズベスト', '人気ナンバー１！魚介の旨みたっぷり！人気の海の幸と、野菜のリッチなおいしさ', 2700, 4050, '16.jpg');
 insert into items values(17, '学芸会カレー', 'みんな大好き！学芸会で作るような味を再現！定番のおいしさを味わえます', 2440, 3650, '17.jpg');
 insert into items values(18, '黄金に輝くチキンカレー', 'カレーが黄金に輝く、超高級鶏肉を使用したカレーです', 2700, 4050, '18.jpg');
+
 
 
 -- トッピング
@@ -87,6 +89,7 @@ insert into toppings values(26, 'ポテト', 200, 300);
 insert into toppings values(27, 'ブラックオリーブ', 200, 300);
 insert into toppings values(28, 'チーズ増量', 200, 300);
 
+
 -- 注文
 drop table if exists orders cascade;
 
@@ -106,6 +109,8 @@ create table orders (
   ) ;
 
 -- 注文商品
+
+
 drop table if exists order_items cascade;
 
 create table order_items (
@@ -116,6 +121,8 @@ create table order_items (
   , size varchar(1)
   , sub_total integer not null
 ) ;
+
+
 
 -- 注文トッピング
 drop table if exists order_toppings cascade;
@@ -128,9 +135,13 @@ create table order_toppings (
 
 -- 管理者機能用のテーブル（id,email,password）
 drop table if exists administrators cascade;
+
+
 create table administrators (
  id serial primary key
  , name varchar(100) not null
  , email varchar(100) not null unique
  , password text not null
 ) ;
+
+
