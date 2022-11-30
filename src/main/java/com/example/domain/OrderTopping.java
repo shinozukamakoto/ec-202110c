@@ -15,7 +15,7 @@ public class OrderTopping {
 	private Integer orderItemId;
 	//topping情報
 	private Topping topping;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -45,6 +45,6 @@ public class OrderTopping {
 		return "OrderTopping [id=" + id + ", toppingId=" + toppingId + ", orderItemId=" + orderItemId + ", topping="
 				+ topping + "]";
 	}
-	
-	
+
+
 }

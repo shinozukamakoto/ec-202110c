@@ -32,29 +32,29 @@ public class OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	private OrderItemRepository orderItemRepository;
-	
+
 	@Autowired
 	private OrderToppingRepository orderToppingRepository;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private MailSender sender;
-	
+
 	/**
 	 * 注文詳細一件を取得
-	 * 
+	 *
 	 * @param orderId
 	 * @return
 	 */
 	public List<Order> orderLoad(Integer orderId){
 		return orderRepository.orderLoad(orderId);
 	}
-	
+
 	/**
 	 * 注文詳細全件を取得
 	 * @param id
@@ -63,7 +63,7 @@ public class OrderService {
 	public List<Order> findByOrder(Integer id){
 		return orderRepository.findByOrdertable(id);
 	}
-	
+
 	/**
 	 * orderドメインに足りない物をセット
 	 * @param order
@@ -73,9 +73,9 @@ public class OrderService {
 		order.setUserId(getUserId());
 		Integer orderId = orderRepository.insert(order);
 		insertOrderItem(orderId);
-		
+
 	}
-	
+
 	/**
 	 * statusを判別するメゾット
 	 * @param order
@@ -88,7 +88,7 @@ public class OrderService {
 			return 2;
 		}
 	}
-	
+
 	/**
 	 * ユーザーのIdを返すメゾット
 	 * @return　userId
@@ -97,10 +97,10 @@ public class OrderService {
 		User user = (User) session.getAttribute("user");
 		return user.getId();
 	}
-	
+
 	/**
 	 * order_itemsテーブルにINSERTするメゾット
-	 * 
+	 *
 	 * @param orderId
 	 */
 	public void insertOrderItem(Integer orderId) {
@@ -109,17 +109,17 @@ public class OrderService {
 		for (CartItem cartItem : cartItemList) {
 			OrderItem orderItem = new OrderItem();
 			BeanUtils.copyProperties(cartItem, orderItem);
-			
+
 			orderItem.setOrderId(orderId);
 			Integer orderItemid = orderItemRepository.order(orderItem);
-			
+
 			InsertOrdertopping(orderItemid, cartItem.getToppingList());
 		}
 	}
-	
+
 	/**
 	 * order_toppingsテーブルにセット
-	 * 
+	 *
 	 * @param orderItemId 注文商品の主キー
 	 * @param toppingList　注文商品が持っているtoppingList
 	 */
@@ -131,7 +131,7 @@ public class OrderService {
 			orderToppingRepository.insert(orderTopping);
 		}
 	}
-	
+
 	/**
 	 * 引数で受け取ったemailに完了メールを送付
 	 * @param email

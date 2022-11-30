@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.User;
 
 /**
  * 管理者のログイン情報を格納するエンティティ.
- * 
+ *
  * @author daimatsunaga
  *
  */
@@ -16,10 +16,10 @@ public class LoginAdministrator  extends User{
 	private static final long serialVersionUID = 1L;
 	/** 管理者情報 */
 	private final Administrator administrator;
-	
+
 	/**
 	 * 通常の管理者情報に加え、認可用ロールを設定する。
-	 * 
+	 *
 	 * @param administrator 管理者情報
 	 * @param authorityList 権限情報が入ったリスト
 	 */
@@ -30,11 +30,11 @@ public class LoginAdministrator  extends User{
 
 	/**
 	 * 管理者情報を返します.
-	 * 
+	 *
 	 * @return 管理者情報
 	 */
 	public Administrator getAdministrator() {
 		return administrator;
 	}
-	
+
 }

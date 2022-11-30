@@ -1,6 +1,6 @@
 package com.example.domain;
 /**
- * 
+ *
  * @author miyazawa
  * 管理者情報のドメインクラス
  *
@@ -15,7 +15,7 @@ public class Administrator {
 	private String password;
 	//メールアドレス
 	private String email;
-	
+
 	//引数ありコンストラクタ
 	public Administrator(Integer id, String name, String password, String email) {
 		super();
@@ -26,7 +26,7 @@ public class Administrator {
 	}
 	//引数なしコンストラクタ
 	public Administrator() {}
-	
+
 	//以下getter及びsetter
 	public Integer getId() {
 		return id;
@@ -57,7 +57,7 @@ public class Administrator {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + "]";
 	}
-	
-	
-	
+
+
+
 }

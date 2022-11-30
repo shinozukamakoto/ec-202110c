@@ -3,7 +3,7 @@ package com.example.domain;
 import java.util.List;
 
 public class CartItem {
-	
+
 	//商品Id
 	private Integer itemId;
 	//商品名
@@ -20,9 +20,9 @@ public class CartItem {
 	private Integer quantity;
 	//商品の元々の金額
 	private Integer itemPrice;
-	
-	
-	
+
+
+
 	public Integer getItemId() {
 		return itemId;
 	}
@@ -77,5 +77,5 @@ public class CartItem {
 				+ ", toppingList=" + toppingList + ", subTotalPrice=" + subTotal + ", area=" + quantity
 				+ ", itemPrice=" + itemPrice + "]";
 	}
-	
+
 }

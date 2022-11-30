@@ -17,44 +17,41 @@ import com.example.repository.UserRepository;
 @Service
 @Transactional
 public class UserService {
-	
+
 	@Autowired
 	private HttpSession session;
 
 	@Autowired
 	private UserRepository repository;
-	
+
 	@Autowired
 	private MailSender sender;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	public User login(String password, String email) {
 		User user = repository.findByMailAddress(email);
-		if (user == null) {
-			return null;
-		}
 		// パスワードが不一致だった場合はnullを返す
-		if (!passwordEncoder.matches(password, user.getPassword())) {
+		if ((user == null) || !passwordEncoder.matches(password, user.getPassword())) {
 			return null;
 		}
 		return user;
 	}
-	
+
 	/**
 	 * ユーザー登録を行う。
 	 * @param user
 	 */
 	public void insert(User user) {
-		
+
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		repository.insert(user);
 	}
-	
+
 	/**
 	 * ２段階認証のパスワードを入力されたメールアドレスに送信
-	 * 
+	 *
 	 * @param email
 	 * @param checkPass
 	 */
@@ -70,7 +67,7 @@ public class UserService {
 
         this.sender.send(msg);
     }
-	
+
 	/**
 	 * ランダムの数字を発行
 	 * @return 生成された４桁の数字
@@ -85,7 +82,7 @@ public class UserService {
 		System.out.println(randomStr);
 		return randomStr;
 	}
-	
+
 	/**
 	 * 数字の確認
 	 * @param numPass　入力された数字
@@ -93,7 +90,7 @@ public class UserService {
 	 */
 	public String checkpass(String numPass) {
 		String checkPass =(String) session.getAttribute("checkPass");
-		
+
 		if(checkPass.equals(numPass)) {
 			session.removeAttribute("checkPass");
 			return "OK";
@@ -101,5 +98,5 @@ public class UserService {
 			return "NO";
 		}
 	}
-	
+
 }

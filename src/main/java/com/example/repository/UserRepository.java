@@ -13,7 +13,7 @@ import com.example.domain.User;
 
 @Repository
 public class UserRepository {
-	
+
 	private static final RowMapper<User> USER_ROW_MAPPER =(rs,i)->{
 		User user = new User();
 		user.setId(rs.getInt("id"));
@@ -27,12 +27,12 @@ public class UserRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
 	public User  findByMailAddress(String email) {
 		String sql ="SELECT * FROM users WHERE email=:email";
-		
+
 		SqlParameterSource param = new MapSqlParameterSource().addValue("email",email);
-		
+
 		try {
 			User user= template.queryForObject(sql, param, USER_ROW_MAPPER);
 			System.out.println(user);
@@ -40,15 +40,15 @@ public class UserRepository {
 		}catch(Exception e) {
 			return null;
 		}
-		
+
 	}
-	
+
 	public void insert(User user) {
 		System.out.println(user);
 		SqlParameterSource param = new BeanPropertySqlParameterSource(user);
 		String sql = "INSERT INTO users (name, email, password, zipcode, address, telephone) "
-				+ "VALUES (:name, :email, :password, :zipcode, :address, :telephone);";	
-		template.update(sql, param);		
+				+ "VALUES (:name, :email, :password, :zipcode, :address, :telephone);";
+		template.update(sql, param);
 	}
-	
+
 }

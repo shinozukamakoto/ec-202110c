@@ -17,7 +17,7 @@ public class ItemRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
 	private static final RowMapper<Item> ITEM_ROW_MAPPER
 	= (rs,i) -> {
 		Item item = new Item();
@@ -30,13 +30,13 @@ public class ItemRepository {
 		item.setDeleted(rs.getBoolean("deleted"));
 		return item;
 	};
-	
+
 	private static final RowMapper<String> NAME_ROW_MAPPER
 	= (rs,i) -> {
 		String name = rs.getString("name");
 		return name;
 	};
-	
+
 	/**
 	 * 商品全件検索
 	 * @return
@@ -46,7 +46,7 @@ public class ItemRepository {
 		List<Item> itemList = template.query(findAllSql, ITEM_ROW_MAPPER);
 		return itemList;
 	}
-	
+
 	/**
 	 * 商品名から検索
 	 * @param name
@@ -61,10 +61,10 @@ public class ItemRepository {
 		}
 		return itemList;
 	}
-	
+
 	/**
 	 * 商品詳細のSQLを発行
-	 * 
+	 *
 	 * @param id 商品ID
 	 * @return Item情報１件
 	 */
@@ -74,7 +74,7 @@ public class ItemRepository {
 		Item item = template.queryForObject(showItemDetailSql, param, ITEM_ROW_MAPPER);
 		return item;
 	}
-	
+
 	public void insert(Item item) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(item);
 		String sql = "INSERT INTO items (name, description, price_m, price_l, image_path, deleted)"

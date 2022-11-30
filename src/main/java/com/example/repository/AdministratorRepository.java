@@ -12,7 +12,7 @@ import com.example.domain.Administrator;
 
 @Repository
 public class AdministratorRepository {
-	
+
 	private static final RowMapper<Administrator> ADMINISTRATOR_ROW_MAPPER =(rs,i)->{
 		Administrator administrator = new Administrator();
 		administrator.setId(rs.getInt("id"));
@@ -24,42 +24,42 @@ public class AdministratorRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
 	public Administrator findByPasswordAndMailAddress(String password,String email) {
 		String sql ="SELECT * FROM administrators WHERE password=:password AND email=:email";
-		
+
 		SqlParameterSource param = new MapSqlParameterSource().addValue("password",password).addValue("email",email);
 		System.out.println(password + " " + email);
-		
+
 		try {
 			Administrator administrator= template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
 			return administrator;
 		}catch(Exception e) {
 			return null;
 		}
-		
+
 	}
-	
+
 	public void insertAdministrator(Administrator administrator) {
-		
+
 		SqlParameterSource param = new BeanPropertySqlParameterSource(administrator);
-		String sql = "INSERT INTO administrators (name, email, password) VALUES (:name, :email, :password);";	
-		template.update(sql, param);		
+		String sql = "INSERT INTO administrators (name, email, password) VALUES (:name, :email, :password);";
+		template.update(sql, param);
 	}
-	
-	
+
+
 	public Administrator findByMailAddress(String email) {
 		String sql ="SELECT * FROM administrators WHERE email=:email";
-		
+
 		SqlParameterSource param = new MapSqlParameterSource().addValue("email",email);
-		
+
 		try {
 			Administrator administrator= template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
 			return administrator;
 		}catch(Exception e) {
 			return null;
 		}
-		
+
 	}
-	
+
 }

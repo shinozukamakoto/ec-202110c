@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 
 
 public class OrderForm {
-	
+
 	//合計金額
 	private Integer totalPrice;
 	//お届け先　氏名
@@ -41,7 +41,7 @@ public class OrderForm {
 	//支払い方法
 	@NotNull(message="支払い方法を入力してください")
 	private Integer paymentMethod;
-	
+
 	public Timestamp getTimestamp() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH");
 	    java.util.Date date;
@@ -55,11 +55,11 @@ public class OrderForm {
 				return null;
 			}
 	}
-	
+
 	public Integer getIntegerDeliveryTime() {
 		return Integer.parseInt(deliveryTime);
 	}
-	
+
 	//ゲッターセッター
 	public Integer getTotalPrice() {
 		return totalPrice;

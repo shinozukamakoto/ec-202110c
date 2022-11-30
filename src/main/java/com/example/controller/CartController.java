@@ -25,62 +25,62 @@ import com.example.service.CartService;
 @Controller
 @RequestMapping("")
 public class CartController {
-	
+
 	@Autowired
 	private CartService service;
 
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private ServletContext application;
-	
+
 	public ItemCartInForm setupForm() {
 		return new ItemCartInForm();
 	}
-	
+
 	//Cartに商品を追加
 	@RequestMapping("/inCart")
 	public String inCart(ItemCartInForm form) {
-		
+
 		CartItem cartItem = new CartItem();
 		BeanUtils.copyProperties(form,cartItem);
 		cartItem.setItemId(form.getId());
-			
+
 		//cartItemにitemの金額を設置
 		cartItem.setItemPrice(service.getPriceSize(form));
-		
+
 		//トッピングをcartItemに代入
 		@SuppressWarnings("unchecked")
 		List<Topping> toppingList = (List<Topping>) application.getAttribute("toppingList");
 		List<Topping> toppings = service.getToppingIndex(toppingList, form.getToppingIndex());
 		cartItem.setToppingList(toppings);
-		
+
 		//小計を代入
 		Integer subPrices = service.calcSubTotal(cartItem);
 		cartItem.setSubTotal(subPrices);
-			
+
 		//カート内の商品をリストに格納
 		//初めてセッションスコープに格納する際はLinkedListを入れる
 		if(session.getAttribute("cartItemList")==null) {
 			List<CartItem> cartItemList = new LinkedList<>();
 			session.setAttribute("cartItemList", cartItemList);
 		}
-			
+
 		@SuppressWarnings("unchecked")
 		List<CartItem> cartItemList = (List<CartItem>) session.getAttribute("cartItemList");
 		cartItemList.add(cartItem);
 		session.setAttribute("cartItemList", cartItemList);
-			
+
 		return "redirect:/showCart";
 	}
-	
+
 	//Cartの中身を表示するメソッド
 	@RequestMapping("/showCart")
 	public String showCart(Model model) {
 		@SuppressWarnings("unchecked")
 		List<CartItem> cartItemList = (List<CartItem>) session.getAttribute("cartItemList");
-		
+
 		int totalPrice = 0;
 		if(cartItemList == null) {
 			session.setAttribute("cartItemList", new LinkedList<>());
@@ -94,7 +94,7 @@ public class CartController {
 		session.setAttribute("totalPrice", totalPrice);
 		return "cart/cart_list";
 	}
-	
+
 	@RequestMapping("/delete")
 	public String delete(String index, Model model) {
 		System.out.println(index);
@@ -103,5 +103,5 @@ public class CartController {
 		cartItemList.remove(Integer.parseInt(index));
 		return showCart(model);
 	}
-	
+
 }

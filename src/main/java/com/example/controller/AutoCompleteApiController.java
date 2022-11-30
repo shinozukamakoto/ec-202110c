@@ -15,8 +15,8 @@ public class AutoCompleteApiController {
 
 	@Autowired
 	private ItemRepository itemRepository;
-	
-	
+
+
 	@GetMapping("/searchItem")
 	public List<String> autoCompleteList() {
 		List<String> allNames = itemRepository.getAllNames();
