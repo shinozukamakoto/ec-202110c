@@ -188,7 +188,7 @@ class AdministratorItemControllerTest {
 	 		 mockMvc.perform(get("/admiUpdate")
 	 	        	.param("name", "")
 	 	            .param("description", ""))
-	 	        	.andExpect(view().name("showItemDetail"));
+	 	        	.andExpect(view().name("item/item_edit"));
 	 		  
 	 	  }
 	 	  
