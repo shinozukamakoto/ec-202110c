@@ -20,7 +20,7 @@ public class OrderItem {
 	private Item item;
 	//注文したトッピングのList
 	private List<OrderTopping> orderTopping;
-	
+
 	//ゲッターとセッター
 	public Integer getId() {
 		return id;
@@ -76,7 +76,7 @@ public class OrderItem {
 				+ ", size=" + size + ", subTotal=" + subTotal + ", item=" + item + ", ordertopping=" + orderTopping
 				+ "]";
 	}
-	
-	
-	
+
+
+
 }

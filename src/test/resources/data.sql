@@ -128,6 +128,7 @@ create table order_toppings (
 
 -- 管理者機能用のテーブル（id,email,password）
 drop table if exists administrators cascade;
+
 create table administrators (
  id serial primary key
  , name varchar(100) not null

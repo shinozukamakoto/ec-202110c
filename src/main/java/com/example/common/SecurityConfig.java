@@ -16,10 +16,10 @@ import com.example.service.AdministratorDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private AdministratorDetailsServiceImpl administratorDetailsService;
-	
+
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
@@ -27,11 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						, "/img_curry/**"
 						, "/js/**");
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 //		http.authorizeRequests().anyRequest().permitAll();
-		
+
 		http
         .authorizeRequests()
         	.antMatchers("/insert", "/insert/insertUser", "/login", "/logout", "/mailInsert", "/mailsend", "/toLogin" ,"/check", "/showList", "/insertAdministrator/**" ,"/searchItem", "/detail", "/inCart", "/showCart", "/delete", "/order", "/orderCompletion", "/orderHistory", "/toOrder", "/orderCo", "/orderdetail" ,"/passCheck").permitAll() //全てのユーザに許可
@@ -52,22 +52,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessUrl("/toLogin")
             .permitAll();
 	}
-	
-	
+
+
 	/**
 	 * 「認証」に関する設定.<br>
 	 * 認証ユーザを取得する「UserDetailsService」の設定や<br>
 	 * パスワード照合時に使う「PasswordEncoder」の設定
-	 * 
+	 *
 	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder)
 	 */
-	
+
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(administratorDetailsService)
 			.passwordEncoder(new BCryptPasswordEncoder());
 	}
-	
+
 	 /**
 	  * <pre>
 	  * @Autowired

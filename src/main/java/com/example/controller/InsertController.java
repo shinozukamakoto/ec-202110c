@@ -26,20 +26,20 @@ import com.example.service.UserService;
 @Controller
 @RequestMapping("/insert")
 public class InsertController {
-	
+
 
 	@ModelAttribute
 	public InsertForm setUpForm() {
 		return new InsertForm();
 	}
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
 	private UserService userService;
-	
-	
+
+
 	/**
 	 * ユーザー登録画面に遷移
 	 * @return
@@ -64,24 +64,24 @@ public class InsertController {
 		if(session.getAttribute("email") == null) {
 			return "redirect:/mailInsert";
 		}
-		
+
 		//バリデーションチェックによるエラーがあればユーザー登録画面に遷移
 		if(result.hasErrors()) {
 			return "register_user";
 		}
-		
+
 		//パスワードと確認用パスワードが不一致の場合エラー文をリクエストスコープに格納してユーザー登録画面に遷移
 		if(!(form.getPassword().equals(form.getConfirmPassword()))) {
 			model.addAttribute("passwordNotMatchError", "パスワードと確認用パスワードが不一致です");
 			return "register_user";
 		}
-		
+
 		//フォームの値をドメインにコピー
 		User user = new User();
 		BeanUtils.copyProperties(form, user);
 		//郵便番号のハイフンを消してドメインにセット
 		user.setZipcode(form.getZipcode().replace("-", ""));
-		
+
 		//emailが既に登録の場合はSQLで例外が発生するのでtry-catchを行う。
 		//例外の際はエラー文をリクエストスコープに格納してユーザー登録画面に遷移
 		try {

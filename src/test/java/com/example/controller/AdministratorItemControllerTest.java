@@ -187,11 +187,11 @@ class AdministratorItemControllerTest {
 	 	  void admiUpdate1() throws Exception {
 	 		 mockMvc.perform(get("/admiUpdate")
 	 				.param("id","1")
-	 	        	.param("name", " ")
-	 	            .param("description", " ")
-	 	            .param("price_m"," ")
-	 	            .param("price_m",""))
-	 	        	.andExpect(view().name("item/item_edit"));
+	 	      .param("name", " ")
+	 	      .param("description", " ")
+	 	      .param("price_m"," ")
+	 	      .param("price_m",""))
+	 	      .andExpect(view().name("item/item_edit"));
 	 		  
 	 	  }
 	 	  

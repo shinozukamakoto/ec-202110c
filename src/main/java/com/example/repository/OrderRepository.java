@@ -27,33 +27,33 @@ import com.example.domain.User;
  */
 @Repository
 public class OrderRepository {
-	
+
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 
 	//orders,users,order_items,items,order_toppings,toppingsのテーブル結合に使うResultSetExtractor
 	private static final ResultSetExtractor<List<Order>> ORDER_RESULTSET = (rs) -> {
-		
+
 		//OrderのListに新たに格納
 		List<Order> orderList = new ArrayList<>();
-		
+
 		//orderItemのListを作成。外部キーに紐づいてるテーブル毎に発行してしまう為初めはnullで宣言しておく
 		List<OrderItem> orderItemList = null;
-		
+
 		//orderToppoingのListを作成。外部キーに紐づいてるテーブル毎に発行してしまう為初めはnullで宣言しておく
 		List<OrderTopping> orderTopping = null;
-		
+
 		//前回のorderのidを入れる箱
 		int beforeIdNum = 0;
-		
+
 		//前回のorderItemのidを入れる箱
 		int itemBefore = 0;
-		
-		
+
+
 		while(rs.next()) {
 			//現在のorderidを代入
 			int nowIdNum = rs.getInt("o_id");
-			
+
 			//現在のidと前回のidが被ってないか確認
 			if(nowIdNum != beforeIdNum) {
 
@@ -71,7 +71,7 @@ public class OrderRepository {
 				order.setDestinationTel(rs.getString("o_destination_tel"));
 				order.setDeliveryTime(rs.getTimestamp("o_delivery_time"));
 				order.setPaymentMethod(rs.getInt("o_payment_method"));
-				
+
 				//Userをセット
 				User user = new User();
 				user.setId(rs.getInt("u_id"));
@@ -81,17 +81,17 @@ public class OrderRepository {
 				user.setZipcode(rs.getString("u_zipcode"));
 				user.setAddress(rs.getString("u_address"));
 				user.setTelephone(rs.getString("u_telephone"));
-				
+
 				//Orderドメインが持っているuserフィールドに外部キーで紐づいているUserをセット
 				order.setUser(user);
-				
+
 				//既に宣言してるorderItemListに新規でArrayListをセット
-				orderItemList = new ArrayList<OrderItem>();
+				orderItemList = new ArrayList<>();
 				order.setOrderItemList(orderItemList);
-				
+
 				orderList.add(order);
 			}
-			
+
 			//現在のorderItemidを代入
 			int itemNow = rs.getInt("oi_id");
 			//現在のorderItemidと前回のorderItemidが被ってないか確認
@@ -114,18 +114,18 @@ public class OrderRepository {
 				item.setPriceL(rs.getInt("i_price_l"));
 				item.setImagePath(rs.getString("i_image_path"));
 				item.setDeleted(rs.getBoolean("i_deleted"));
-				
+
 				//OrderItemドメインが持っているItemフィールドに外部キーで紐づいているItemrをセット
 				orderItem.setItem(item);
-				
-				//既に宣言してるorderToppingListに新規でArrayListをセット				
-				orderTopping = new ArrayList<OrderTopping>();
+
+				//既に宣言してるorderToppingListに新規でArrayListをセット
+				orderTopping = new ArrayList<>();
 				orderItem.setOrderTopping(orderTopping);
 
-				
+
 				orderItemList.add(orderItem);
 			}
-			
+
 			//orderToppingを持っていないorderItemにオブジェクトを作らないようにする
 			if(rs.getInt("ot_id") != 0) {
 				//orderToppingオブジェクトにSQLのデータをセット
@@ -133,7 +133,7 @@ public class OrderRepository {
 				orderToppings.setId(rs.getInt("ot_id"));
 				orderToppings.setToppingId(rs.getInt("ot_topping_id"));
 				orderToppings.setOrderItemId(rs.getInt("ot_order_item_id"));
-				
+
 				//toppingをセット
 				Topping topping = new Topping();
 				topping.setId(rs.getInt("t_id"));
@@ -151,10 +151,10 @@ public class OrderRepository {
 		}
 		return orderList;
 	};
-	
+
 	/**
 	 * orderの詳細を表示するメゾット
-	 * 
+	 *
 	 * @param orderId
 	 * @return　List<Order> １件の注文内容
 	 */
@@ -177,14 +177,14 @@ public class OrderRepository {
 				+ "LEFT OUTER JOIN order_toppings ot ON oi.id = ot.order_item_id "
 				+ "LEFT OUTER JOIN toppings t ON ot.topping_id = t.id "
 				+ "WHERE o.id = :orderId ORDER BY i.id DESC";
-		
+
 		SqlParameterSource param = new MapSqlParameterSource().addValue("orderId", orderId);
-		
+
 		List<Order> orderList = template.query(sql, param ,ORDER_RESULTSET);
 		return orderList;
 	}
-	
-	
+
+
 	/**
 	 * orders,users,order_items,items,order_toppings,toppingsのテーブルを結合して出力
 	 * @param userId
@@ -209,18 +209,18 @@ public class OrderRepository {
 				+ "LEFT OUTER JOIN order_toppings ot ON oi.id = ot.order_item_id "
 				+ "LEFT OUTER JOIN toppings t ON ot.topping_id = t.id "
 				+ "WHERE o.user_id = :userId ORDER BY o.order_date DESC, o.id DESC, i.id DESC";
-		
+
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
-		
+
 		List<Order> orderList = template.query(sql, param ,ORDER_RESULTSET);
-		
+
 		if(orderList.size() == 0) {
 			return null;
 		}
 		return orderList;
 	}
-	
-	
+
+
 	/**
 	 * Orderの情報をSQLに登録
 	 * @param order
@@ -230,14 +230,14 @@ public class OrderRepository {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
 		String insertSql = "INSERT INTO orders (user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method) "
 				+ "VALUES (:userId, :status, :totalPrice, :orderDate, :destinationName, :destinationEmail, :destinationZipcode, :destinationAddress, :destinationTel, :deliveryTime, :paymentMethod);";
-		
+
 		//自動採番の際にidを取得する
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		String[] keyColumnNames = {"id"};
 		template.update(insertSql, param, keyHolder, keyColumnNames);
 		order.setId(keyHolder.getKey().intValue());
-		
+
 		return order.getId();
 	}
-	
+
 }

@@ -23,10 +23,10 @@ import com.example.service.UserService;
 @Controller
 @RequestMapping("")
 public class TwoStepVerificationController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -34,7 +34,7 @@ public class TwoStepVerificationController {
 	public RandomCheckForm setUprandomForm() {
 		return new RandomCheckForm();
 	}
-	
+
 	/**
 	 * メールアドレス入力画面
 	 * @return
@@ -46,7 +46,7 @@ public class TwoStepVerificationController {
 		session.removeAttribute("checkPass");
 		return "/insert/mail_insert";
 	}
-	
+
 	/**
 	 * 入力されたメールアドレスに生成された数列を送信
 	 * @param form
@@ -54,7 +54,7 @@ public class TwoStepVerificationController {
 	 */
 	@RequestMapping("mailsend")
 	public String mailSend(@Validated RandomCheckForm form, BindingResult result ,Model model) {
-		
+
 		if(result.hasErrors()) {
 			return mailInsert();
 		}
@@ -62,21 +62,22 @@ public class TwoStepVerificationController {
 		String checkPass = userService.randomPass();
 		//入力されたメールアドレスに送信
 		userService.sendMail(form.getMail(),checkPass);
-		
+
 		return "redirect:/passCheck";
 	}
-	
+
+	//メールアドレス確認
 	@RequestMapping("/passCheck")
 	public String passCheck() {
 		String emailcheck = (String) session.getAttribute("emailcheck");
 		if(emailcheck == null) {
 			return "redirect:/mailInsert";
 		}
-		
+
 		return "/insert/pass_check";
 	}
-	
-	
+
+
 	/**
 	 * 数列を判断
 	 * @param form
@@ -88,11 +89,11 @@ public class TwoStepVerificationController {
 		if(session.getAttribute("emailcheck") == null) {
 			return "redirect:/mailInsert";
 		}
-		
+
 		String message =  userService.checkpass(form.getPassCheck());
-		
+
 		String email = (String) session.getAttribute("emailcheck");
-		
+
 		if(message.equals("OK")) {
 			session.setAttribute("email", email);
 			return "redirect:/insert";

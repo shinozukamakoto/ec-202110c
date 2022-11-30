@@ -39,7 +39,7 @@ public class Order {
 	private User user;
 	//OrderItemのリスト
 	private List<OrderItem> orderItemList;
-	
+
 	//ゲッターとセッター
 	public Integer getId() {
 		return id;
@@ -125,7 +125,7 @@ public class Order {
 	public void setOrderItemList(List<OrderItem> orderItemList) {
 		this.orderItemList = orderItemList;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", userId=" + userId + ", status=" + status + ", totalPrice=" + totalPrice
@@ -134,5 +134,5 @@ public class Order {
 				+ destinationAddress + ", destinationTel=" + destinationTel + ", deliveryTime=" + deliveryTime
 				+ ", paymentMethod=" + paymentMethod + ", user=" + user + ", orderItemList=" + orderItemList + "]";
 	}
-	
+
 }

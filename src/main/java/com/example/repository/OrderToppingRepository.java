@@ -19,10 +19,10 @@ import com.example.domain.OrderTopping;
 public class OrderToppingRepository {
 
 	//private static final RowMapper<OrderTopping> ORDER_TOPPING_ROW_MAPPER = new BeanPropertyRowMapper<>(OrderTopping.class);
-	
+
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
 	/**
 	 * 注文トッピングを追加
 	 * @param orderTopping

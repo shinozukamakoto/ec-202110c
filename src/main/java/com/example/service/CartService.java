@@ -18,14 +18,14 @@ import com.example.form.ItemCartInForm;
 @Service
 @Transactional
 public class CartService {
-	
+
 	public ItemCartInForm setupForm() {
 		return new ItemCartInForm();
 	}
-	
+
 	/**
 	 * サイズに合わせてitemの金額を判定
-	 * @param form 
+	 * @param form
 	 * @return itemの金額
 	 */
 	public Integer getPriceSize(ItemCartInForm form) {
@@ -35,13 +35,13 @@ public class CartService {
 			return form.getPriceL();
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param toppingList　applicationスコープ内に格納してあるトッピング一覧
 	 * @param toppingIndex　formから送られてきたトッピングの情報
 	 * @return トッピング一覧を格納したList　一覧がなければLinkedListで返す
-	 * 
+	 *
 	 */
 	public List<Topping> getToppingIndex(List<Topping> toppingList ,List<String> toppingIndex) {
 		if(toppingIndex == null) {
@@ -58,20 +58,20 @@ public class CartService {
 	//小計を計算するメソッド
 	public Integer calcSubTotal(CartItem cartItem) {
 		if(cartItem.getSize().equals("M")) {
-			Integer subTotalM =
+			int subTotalM =
 			(cartItem.getItemPrice()+(cartItem.getToppingList().size() * 200)) * cartItem.getQuantity();
 			return subTotalM;
 		} else {
-		Integer subTotalL =
+		int subTotalL =
 			(cartItem.getItemPrice()+(cartItem.getToppingList().size() * 300)) * cartItem.getQuantity();
 			return subTotalL;
 		}
 	}
-	
+
 	//合計金額を計算するメソッド
 	public Integer calcTotal(List<CartItem> totalPriceList) {
-			
-		Integer totalPrices=0;
+
+		int totalPrices=0;
 		for(CartItem price:totalPriceList) {
 			totalPrices += price.getSubTotal();
 		}
