@@ -40,28 +40,7 @@ public class HyperSessionUtil {
 		return createMockHttpSession(sessionMap);
 	}
 
-	public static MockHttpSession createUserIdAndOrderSession() {
-		Map<String, Object> sessionMap = new LinkedHashMap<>();
-		User user = new User();
-		user.setId(1);
-		user.setName("テストユーザ");
-		user.setEmail("test@gmail.com");
-		user.setPassword("testpassword");
-		user.setZipcode("1111111");
-		user.setAddress("テスト住所");
-		user.setTelephone("テスト電話番号");
-		sessionMap.put("user", user);
-
-		CartItem cart = new CartItem();
-		cart.setItemId(1);
-		cart.setName("カレー");
-		cart.setItemPrice(300);
-		cart.setSize("M");
-		sessionMap.put("cartItemList", cart);// List<CartItem>
-		sessionMap.put("totalPrice", 1000);
-		return createMockHttpSession(sessionMap);
-	}
-
+	
 	public static MockHttpSession createUserIdAndOrderCompletionSession() {
 		Map<String, Object> sessionMap = new LinkedHashMap<>();
 		User user = new User();

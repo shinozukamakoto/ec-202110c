@@ -55,7 +55,7 @@ class OrderControlerTest {
 	@Test
 	@DisplayName("注文確認画面への遷移（ログイン情報確認成功）")
 	void testToOrder01() throws Exception {
-		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderSession();
+		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/toOrder")
 				.session(userAndOrderSession))
 				.andExpect(view().name("order/order_confirm"));

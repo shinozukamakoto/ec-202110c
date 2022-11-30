@@ -60,7 +60,7 @@ public class UserService {
         session.setAttribute("checkPass", checkPass);
         session.setAttribute("emailcheck", email);
 
-        msg.setFrom("yamada@example.com");
+        msg.setFrom("masato.nara@rakus-partners.co.jp");
         msg.setTo(email);
         msg.setSubject("２段階認証パスワード発行");//タイトルの設定
         msg.setText(checkPass + " こちらを画面に入力してください"); //本文の設定
