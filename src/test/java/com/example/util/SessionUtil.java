@@ -3,8 +3,9 @@ package com.example.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.example.ecommerce_a.domain.User;
 import org.springframework.mock.web.MockHttpSession;
+
+import com.example.domain.User;
 
 public class SessionUtil {
 
