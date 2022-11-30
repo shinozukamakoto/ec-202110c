@@ -40,6 +40,7 @@ public class ToppingRepository {
 		String findAllToppingSql = "SELECT * FROM toppings";
 		List<Topping> toppingList = template.query(findAllToppingSql, TOPPING_ROW_MAPPER);
 		return toppingList;
+		
 	}
 
 }

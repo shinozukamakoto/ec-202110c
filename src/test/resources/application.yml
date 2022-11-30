@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/ec-202110-c
+    url: jdbc:postgresql://localhost:5432/ec202110c-test
     username: postgres
     password: postgres
   sql:
@@ -16,6 +16,3 @@ spring:
 #    password: rlbfppgjhxfsaymf
 #    properties.mail.smtp.auth: true
 #    properties.mail.smtp.starttls.enable: true
-server:
-  servlet:
-    context-path: /ec-202110c

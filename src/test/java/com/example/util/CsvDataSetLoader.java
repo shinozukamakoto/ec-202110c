@@ -7,8 +7,10 @@ import org.springframework.core.io.Resource;
 import com.github.springtestdbunit.dataset.AbstractDataSetLoader;
 
 public class CsvDataSetLoader extends AbstractDataSetLoader {
-    @Override
-    protected IDataSet createDataSet(Resource resource) throws Exception {
-        return new CsvDataSet(resource.getFile());
-    }
+
+	@Override
+	protected IDataSet createDataSet(Resource resource) throws Exception {
+		return new CsvDataSet(resource.getFile());
+	}
+
 }

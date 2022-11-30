@@ -157,6 +157,7 @@ public class AdministratorItemController {
 		System.out.println(id);
 		service.delete(id);
 		return "redirect:/admiShowList";
+	
 	}
 
 	@RequestMapping("/admiUpdate")

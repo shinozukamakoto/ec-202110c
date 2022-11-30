@@ -1,6 +1,5 @@
 package com.example.util;
 
-
 import java.io.IOException;
 
 import org.dbunit.dataset.DataSetException;
@@ -12,11 +11,11 @@ import com.github.springtestdbunit.dataset.AbstractDataSetLoader;
 
 public class XlsDataSetLoader extends AbstractDataSetLoader {
 
-    @Override
-    protected IDataSet createDataSet(Resource resource) throws IOException, DataSetException {
-//        try (InputStream inputStream = resource.getInputStream()) {
-//            return new XlsDataSet(inputStream);
-//        }
-    	return new XlsDataSet(resource.getFile());
-    }
+	@Override
+	protected IDataSet createDataSet(Resource resource) throws IOException, DataSetException {
+		//        try (InputStream inputStream = resource.getInputStream()) {
+		//            return new XlsDataSet(inputStream);
+		//        }
+		return new XlsDataSet(resource.getFile());
+	}
 }
