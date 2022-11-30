@@ -26,7 +26,6 @@ import org.springframework.web.context.WebApplicationContext;
 import com.example.util.CsvDataSetLoader;
 import com.example.util.HyperSessionUtil;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 
 @SpringBootTest
@@ -80,21 +79,17 @@ class TwoStepVerificationControllerTest {
 
 	@Test
 	@DisplayName("入力されたメールアドレスに送信（失敗")
-	@DatabaseSetup("/User/insert_01/expected")
 	void testMailSend01() throws Exception {
 		mockMvc.perform(post("/mailsend"))
-				.andExpect(view().name("/insert/mail_insert"))
-				.andReturn();
+				.andExpect(view().name("/insert/mail_insert"));
 	}
 
 	@Test
 	@DisplayName("入力されたメールアドレスに送信（成功")
-	@DatabaseSetup("/User/insert_01/expected")
 	void testMailSend02() throws Exception {
 		mockMvc.perform(post("/mailsend")
 				.param("mail", "yamada@example.com"))
-				.andExpect(view().name("redirect:/passCheck"))
-				.andReturn();
+				.andExpect(view().name("redirect:/passCheck"));
 	}
 
 	@Test
