@@ -159,7 +159,7 @@ class AdministratorItemControllerTest {
 	        }*/
 
 	       @Test
-	 	   @DisplayName("商品詳細を表示")
+	 	   @DisplayName("商品編集画面を表示")
 	 	   void admiDetail() throws Exception {
 	 	        // ①コントローラー呼出し
 	    	   
@@ -170,7 +170,7 @@ class AdministratorItemControllerTest {
   		
 	       }
 	 	        
-	 	   @Test
+	       @Test
 	 	   @DisplayName("論理削除（UPDATE items SET deleted = true>=csv 商品編集画面に遷移）")
 	 	   @ExpectedDatabase(value = "/item", assertionMode = DatabaseAssertionMode.NON_STRICT)
 	 	   void admiDelete() throws Exception {
@@ -183,12 +183,15 @@ class AdministratorItemControllerTest {
 			 }
 	 	   
 	 	  @Test
-	 	  @DisplayName("エラーが存在する場合には、商品更新画面に遷移")
+	 	  @DisplayName("エラーが存在する場合には、商品編集画面に遷移")
 	 	  void admiUpdate1() throws Exception {
 	 		 mockMvc.perform(get("/admiUpdate")
-	 	        	.param("name", "")
-	 	            .param("description", ""))
-	 	        	.andExpect(view().name("item/item_edit"));
+	 				.param("id","1")
+	 	      .param("name", " ")
+	 	      .param("description", " ")
+	 	      .param("price_m"," ")
+	 	      .param("price_m",""))
+	 	      .andExpect(view().name("item/item_edit"));
 	 		  
 	 	  }
 	 	  
