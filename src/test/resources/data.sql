@@ -12,6 +12,10 @@ create table users (
 ) ;
 
 
+--ユーザー登録(pass:morimori)
+insert into users(name, email, password, zipcode, address, telephone) values('テストユーザ', 'test@test.co.jp', '$2a$10$Utoo6nr3XIFEh4xOZ9Zr1.n/PtEYBb8HhlLDDklaJwsj.T3uux4kq','1111111', 'テスト住所', 'テスト電話番号');
+
+
 -- 商品
 drop table if exists items cascade;
 
@@ -25,77 +29,6 @@ create table items (
   , deleted boolean default false not null
 ) ;
 
-
--- トッピング
-drop table if exists toppings cascade;
-
-create table toppings (
-  id integer primary key
-  , name text not null
-  , price_m integer not null
-  , price_l integer not null
-) ;
-
-
--- 注文
-drop table if exists orders cascade;
-
-create table orders (
-  id serial primary key
-  , user_id integer not null
-  , status integer not null
-  , total_price integer not null
-  , order_date date
-  , destination_name varchar(100)
-  , destination_email varchar(100)
-  , destination_zipcode varchar(8)
-  , destination_address varchar(200)
-  , destination_tel varchar(15)
-  , delivery_time timestamp
-  , payment_method integer
-  ) ;
-  
-  
-  -- 注文商品
-drop table if exists order_items cascade;
-
-create table order_items (
-  id serial primary key
-  , item_id integer not null
-  , order_id integer not null
-  , quantity integer not null
-  , size varchar(1)
-  , sub_total integer not null
-) ;
-
-
--- 注文トッピング
-drop table if exists order_toppings cascade;
-
-create table order_toppings (
-  id serial primary key
-  , topping_id integer not null
-  , order_item_id integer not null
-) ;
-
-
--- 管理者機能用のテーブル（id,email,password）
-drop table if exists administrators cascade;
-
-create table administrators (
- id serial primary key
- , name varchar(100) not null
- , email varchar(100) not null unique
- , password text not null
-) ;
-
-
-
---ユーザー登録(pass:morimori)
-insert into users(name, email, password, zipcode, address, telephone) values('テストユーザ', 'test@test.co.jp', '$2a$10$Utoo6nr3XIFEh4xOZ9Zr1.n/PtEYBb8HhlLDDklaJwsj.T3uux4kq','1111111', 'テスト住所', 'テスト電話番号');
-
-
--- 商品
 insert into items values(1, 'カツカレー', '食べると勝負に勝てると言われる勝つカレー。ラクラクカレー定番の１品です', 1490, 2570, '1.jpg');
 insert into items values(2, 'ポークポークカレー・ミート', 'グリーンアスパラと相性の良いベーコンにいろどりのフレッシュトマトをトッピングし特製マヨソースでまとめた商品です', 1490, 2570, '2.jpg');
 insert into items values(3, '牛すじカレー', 'トロトロの牛すじとネギの風味が格別な味わいシンプルなカレーです！', 1490, 2570, '3.jpg');
@@ -116,7 +49,17 @@ insert into items values(17, '学芸会カレー', 'みんな大好き！学芸�
 insert into items values(18, '黄金に輝くチキンカレー', 'カレーが黄金に輝く、超高級鶏肉を使用したカレーです', 2700, 4050, '18.jpg');
 
 
+
 -- トッピング
+drop table if exists toppings cascade;
+
+create table toppings (
+  id integer primary key
+  , name text not null
+  , price_m integer not null
+  , price_l integer not null
+) ;
+
 insert into toppings values(1, 'オニオン', 200, 300);
 insert into toppings values(2, 'ツナマヨ', 200, 300);
 insert into toppings values(3, 'イタリアントマト', 200, 300);
@@ -145,3 +88,56 @@ insert into toppings values(25, 'もち', 200, 300);
 insert into toppings values(26, 'ポテト', 200, 300);
 insert into toppings values(27, 'ブラックオリーブ', 200, 300);
 insert into toppings values(28, 'チーズ増量', 200, 300);
+
+
+-- 注文
+drop table if exists orders cascade;
+
+create table orders (
+  id serial primary key
+  , user_id integer not null
+  , status integer not null
+  , total_price integer not null
+  , order_date date
+  , destination_name varchar(100)
+  , destination_email varchar(100)
+  , destination_zipcode varchar(8)
+  , destination_address varchar(200)
+  , destination_tel varchar(15)
+  , delivery_time timestamp
+  , payment_method integer
+  ) ;
+
+-- 注文商品
+
+drop table if exists order_items cascade;
+
+create table order_items (
+  id serial primary key
+  , item_id integer not null
+  , order_id integer not null
+  , quantity integer not null
+  , size varchar(1)
+  , sub_total integer not null
+) ;
+
+
+-- 注文トッピング
+drop table if exists order_toppings cascade;
+
+create table order_toppings (
+  id serial primary key
+  , topping_id integer not null
+  , order_item_id integer not null
+) ;
+
+-- 管理者機能用のテーブル（id,email,password）
+drop table if exists administrators cascade;
+
+create table administrators (
+ id serial primary key
+ , name varchar(100) not null
+ , email varchar(100) not null unique
+ , password text not null
+) ;
+
