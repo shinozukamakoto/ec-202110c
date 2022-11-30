@@ -76,8 +76,7 @@ public class TwoStepVerificationController {
 
 		return "/insert/pass_check";
 	}
-
-
+	
 	/**
 	 * 数列を判断
 	 * @param form

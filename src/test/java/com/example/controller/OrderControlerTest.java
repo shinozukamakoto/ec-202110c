@@ -76,7 +76,7 @@ class OrderControlerTest {
 				.session(userAndOrderSession)
 				.param("orderDate","2019-05-01")
 				.param("deliveryTime","10"))
-				.andExpect(view().name("redirect:/orderCompletion"));
+				.andExpect(view().name("/order/order_confirm"));
 	}
 
 	@Test
