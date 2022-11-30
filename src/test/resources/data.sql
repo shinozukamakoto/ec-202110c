@@ -110,6 +110,7 @@ create table orders (
 
 -- 注文商品
 
+
 drop table if exists order_items cascade;
 
 create table order_items (
@@ -120,6 +121,7 @@ create table order_items (
   , size varchar(1)
   , sub_total integer not null
 ) ;
+
 
 
 -- 注文トッピング
@@ -134,10 +136,12 @@ create table order_toppings (
 -- 管理者機能用のテーブル（id,email,password）
 drop table if exists administrators cascade;
 
+
 create table administrators (
  id serial primary key
  , name varchar(100) not null
  , email varchar(100) not null unique
  , password text not null
 ) ;
+
 
