@@ -103,8 +103,8 @@ class AdministratorItemControllerTest {
 	        Item item1 = itemList.get(0);
 	        Item item2 = itemList.get(itemList.size()-1);
 	        assertAll(
-	    			() -> assertEquals("ポークポークカレー・ミート", item1.getName()),
-	    			() -> assertEquals("ほうれん草のカレードリア", item2.getName())
+	    			() -> assertEquals("カツカレー　", item1.getName()),
+	    			() -> assertEquals("とんかつカレーラーメン", item2.getName())
 	    		);
 	        //18件あり1ページにつき5件表示させる場合→1,2,3、4がpageNumbersに入る
 	        
@@ -187,11 +187,11 @@ class AdministratorItemControllerTest {
 	 	  void admiUpdate1() throws Exception {
 	 		 mockMvc.perform(get("/admiUpdate")
 	 				.param("id","1")
-	 	        	.param("name", " ")
-	 	            .param("description", " ")
-	 	            .param("price_m"," ")
-	 	            .param("price_m",""))
-	 	        	.andExpect(view().name("item/item_edit"));
+	 	      .param("name", " ")
+	 	      .param("description", " ")
+	 	      .param("price_m"," ")
+	 	      .param("price_m",""))
+	 	      .andExpect(view().name("item/item_edit"));
 	 		  
 	 	  }
 	 	  
