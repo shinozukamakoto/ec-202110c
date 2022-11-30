@@ -124,6 +124,26 @@ class CartControllerTest {
 		
 
 	}
+	
+	//Cartの中身を表示するメソッド（まだできてない）
+	       // Cartの中身を消す
+	        @Test
+	    void showCartTest04() throws Exception {
+	        	List<CartItem> cartItemList = new ArrayList<>();
+	    		CartItem cartItem = new CartItem();
+	    		cartItem.setSize("L");
+	    		cartItem.setSubTotal(1000);
+	    		cartItemList.add(cartItem);
+	    		MvcResult mvcResult = mockMvc.perform(get("/showCart").sessionAttr("cartItemList", cartItemList))
+	    				.andExpect(view().name("cart/cart_list")).andReturn();
+	    		
+	    		HttpSession session = mvcResult.getRequest().getSession();
+	    		List<CartItem> resultCartItemList = (List<CartItem>)session.getAttribute("cartItemList");
+	    		
+	    		assertEquals(1, resultCartItemList.size());
+	      
+	       }
+
 
 	// Cartの中身を消す
 	@Test
