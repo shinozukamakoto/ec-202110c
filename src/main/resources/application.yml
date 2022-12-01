@@ -5,8 +5,10 @@ spring:
     username: postgres
     password: postgres
   mail:
-    host: smtp.gmail.com
-    port: 587
+    host: localhost
+    port: 1025
+#    host: smtp.gmail.com
+#    port: 587
     username: on99.matsunaga.dai@gmail.com
     password: rlbfppgjhxfsaymf
     properties.mail.smtp.auth: true

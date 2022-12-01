@@ -48,19 +48,32 @@ public class HyperSessionUtil {
 		user.setName("テストユーザ");
 		user.setEmail("test@gmail.com");
 		user.setPassword("testpassword");
-		user.setZipcode("1111111");
+		user.setZipcode("111-1111");
 		user.setAddress("テスト住所");
-		user.setTelephone("テスト電話番号");
+		user.setTelephone("0000-0000-0000");
 		sessionMap.put("user", user);
 
 		CartItem cart = new CartItem();
+		List<CartItem> cartList = new ArrayList<>();
+		
 		cart.setItemId(1);
-		cart.setName("カレー");
+		cart.setName("カツカレー");
 		cart.setItemPrice(300);
 		cart.setSize("M");
 		cart.setQuantity(2);
-		sessionMap.put("cartItemList", cart);// List<CartItem>
+		cart.setSubTotal(300);
+		Topping topp = new Topping();
+		List<Topping> toppingList = new ArrayList<>();
+		topp.setId(1);
+		topp.setName("ナス");
+		topp.setPriceM(150);
+		topp.setPriceL(200);
+		toppingList.add(topp);
+		cart.setToppingList(toppingList);
+		cartList.add(cart);
+		sessionMap.put("cartItemList", cartList);// List<CartItem>
 		sessionMap.put("totalPrice", 1000);
+		
 
 		
 		OrderItem orderitem = new OrderItem();
@@ -90,6 +103,8 @@ public class HyperSessionUtil {
 		orderItemList.add(orderitem);
 		order.setOrderItemList(orderItemList);
 		
+		
+		
 		order.setId(1);
 		order.setUserId(1);
 		order.setStatus(1);
@@ -99,9 +114,9 @@ public class HyperSessionUtil {
 		order.setOrderDate(orderdate);
 		order.setDestinationName("テストユーザー");
 		order.setDestinationEmail("test@gmail.com");
-		order.setDestinationZipcode("1111111");
+		order.setDestinationZipcode("111-1111");
 		order.setDestinationAddress("テスト住所");
-		order.setDestinationTel("テスト電話番号");
+		order.setDestinationTel("0000-0000-0000");
 		order.setPaymentMethod(1);
 		order.setUser(user);
 		String datetime = "2019-05-01 09:02:03.123456789";
