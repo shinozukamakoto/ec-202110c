@@ -1,8 +1,9 @@
 package com.example.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -17,7 +18,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+
 import com.example.domain.Item;
+
 
 @SpringBootTest
 class AutoCompleteApiControllerTest {
@@ -46,16 +49,17 @@ class AutoCompleteApiControllerTest {
 
 	  @Test
 	  public void test() throws Exception {
-	    Item item = new Item();
-	    item.setName("Test Item");
-
-	    List<Item> allNames = Arrays.asList(item);
-
 	    MvcResult mvcResult = mockMvc.perform(get("/searchItem")).andReturn();
-	    String result = mvcResult.getResponse().getContentAsString();
-	    System.out.println(result);
 
+		String result = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
 
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<String> itemList = objectMapper.readValue(result, new TypeReference<>() {});
+
+		System.out.println(itemList);
+		
+		assertEquals("カツカレー", itemList.get(0), "No1 カツカレー");
+		assertEquals("学芸会カレー", itemList.get(itemList.size()-2), "No17 学芸会カレー");
 	  }
 	
 }
