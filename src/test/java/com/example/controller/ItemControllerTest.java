@@ -114,7 +114,7 @@ class ItemControllerTest {
     	@DisplayName("空文字検索")
 	    void showList3() throws Exception {
     		MvcResult mvcResult = mockMvc.perform(get("/showList")
-            	.param("searchName", " "))
+            	.param("searchName", ""))
     			.andExpect(view().name("item/item_list_curry"))
     			.andReturn();
     		
