@@ -57,8 +57,7 @@ class OrderControlerTest {
 	void testToOrder01() throws Exception {
 		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/toOrder")
-				.session(userAndOrderSession)
-				.param("user","user"))
+				.session(userAndOrderSession))
 				.andExpect(view().name("order/order_confirm"));
 	}
 
@@ -75,16 +74,9 @@ class OrderControlerTest {
 		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/order")
 				.session(userAndOrderSession)
-				.param("totalPrice","3000")
-				.param("orderDate","2022-12-10")
-				.param("deliveryTime","12")
-				.param("destinationName","ebian")
-				.param("destinationEmail","ebina@gmail.com")
-				.param("destinationZipcode","111-1111")
-				.param("destinationAddress","テスト住所")
-				.param("destinationTel","0000-0000-0000")
-				.param("paymentMethod","1"))
-				.andExpect(view().name("redirect:/orderCompletion"));
+				.param("orderDate","2019-05-01")
+				.param("deliveryTime","10"))
+				.andExpect(view().name("/order/order_confirm"));
 	}
 
 	@Test
@@ -93,70 +85,17 @@ class OrderControlerTest {
 		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/order")
 				.session(userAndOrderSession)
-				.param("totalPrice","3000")
-				.param("orderDate","2022-10-10")
-				.param("deliveryTime","10")
-				.param("destinationName","ebian")
-				.param("destinationEmail","ebina@gmail.com")
-				.param("destinationZipcode","111-1111")
-				.param("destinationAddress","テスト住所")
-				.param("destinationTel","0000-0000-0000")
-				.param("paymentMethod","1"))
+				.param("orderDate","2019-04-01"))
 				.andExpect(view().name("/order/order_confirm"));
 	}
-	
+
 	@Test
-	@DisplayName("注文完了画面への遷移（失敗＝ヴァリデーション,失敗＝日付が空白）")
+	@DisplayName("注文完了画面への遷移（失敗＝日時が３時間以内）")
 	void testOrderCompletion03() throws Exception{
 		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/order")
 				.session(userAndOrderSession)
-				.param("totalPrice","3000")
-				.param("orderDate","")
-				.param("deliveryTime","10")
-				.param("destinationName","ebian")
-				.param("destinationEmail","ebina@gmail.com")
-				.param("destinationZipcode","111-1111")
-				.param("destinationAddress","テスト住所")
-				.param("destinationTel","0000-0000-0000")
-				.param("paymentMethod","1"))
-				.andExpect(view().name("/order/order_confirm"));
-	}
-
-	
-	@Test
-	@DisplayName("注文完了画面への遷移（失敗＝ヴァリデーション,失敗＝日付が過去）")
-	void testOrderCompletion04() throws Exception{
-		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
-		mockMvc.perform(get("/order")
-				.session(userAndOrderSession)
-				.param("totalPrice","3000")
-				.param("orderDate","2022-10-10")
-				.param("deliveryTime","10")
-				.param("destinationName","ebian")
-				.param("destinationEmail","ebina@gmail.com")
-				.param("destinationZipcode","111-1111")
-				.param("destinationAddress","テスト住所")
-				.param("destinationTel","00000000-0000")
-				.param("paymentMethod","1"))
-				.andExpect(view().name("/order/order_confirm"));
-	}
-	@Test
-	@DisplayName("注文完了画面への遷移（現時刻より３時間以内）")
-	void testOrderCompletion05() throws Exception{
-		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
-		mockMvc.perform(get("/order")
-				.session(userAndOrderSession)
-				.session(userAndOrderSession)
-				.param("totalPrice","3000")
-				.param("orderDate","2022-12-1")
-				.param("deliveryTime","23")
-				.param("destinationName","ebian")
-				.param("destinationEmail","ebina@gmail.com")
-				.param("destinationZipcode","111-1111")
-				.param("destinationAddress","テスト住所")
-				.param("destinationTel","0000-0000-0000")
-				.param("paymentMethod","1"))
+				.param("deliveryTime","10"))
 				.andExpect(view().name("/order/order_confirm"));
 	}
 
@@ -165,16 +104,7 @@ class OrderControlerTest {
 	void testOrderHistory01()throws Exception {
 		MockHttpSession orderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/orderHistory")
-				.session(orderSession)
-				.param("totalPrice","3000")
-				.param("orderDate","2022-12-1")
-				.param("deliveryTime","23")
-				.param("destinationName","ebian")
-				.param("destinationEmail","ebina@gmail.com")
-				.param("destinationZipcode","111-1111")
-				.param("destinationAddress","テスト住所")
-				.param("destinationTel","0000-0000-0000")
-				.param("paymentMethod","1"))
+				.session(orderSession))
 				.andExpect(view().name("order/order_history"));
 	}
 
