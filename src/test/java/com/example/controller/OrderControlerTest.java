@@ -77,7 +77,7 @@ class OrderControlerTest {
 				.session(userAndOrderSession)
 				.param("totalPrice","3000")
 				.param("orderDate","2022-12-10")
-				.param("deliveryTime","10")
+				.param("deliveryTime","12")
 				.param("destinationName","ebian")
 				.param("destinationEmail","ebina@gmail.com")
 				.param("destinationZipcode","111-1111")
@@ -142,12 +142,21 @@ class OrderControlerTest {
 				.andExpect(view().name("/order/order_confirm"));
 	}
 	@Test
-	@DisplayName("注文完了画面への遷移（失敗＝日時が３時間以内）")
+	@DisplayName("注文完了画面への遷移（現時刻より３時間以内）")
 	void testOrderCompletion05() throws Exception{
 		MockHttpSession userAndOrderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/order")
 				.session(userAndOrderSession)
-				.param("deliveryTime","10"))
+				.session(userAndOrderSession)
+				.param("totalPrice","3000")
+				.param("orderDate","2022-12-1")
+				.param("deliveryTime","23")
+				.param("destinationName","ebian")
+				.param("destinationEmail","ebina@gmail.com")
+				.param("destinationZipcode","111-1111")
+				.param("destinationAddress","テスト住所")
+				.param("destinationTel","0000-0000-0000")
+				.param("paymentMethod","1"))
 				.andExpect(view().name("/order/order_confirm"));
 	}
 
@@ -157,7 +166,15 @@ class OrderControlerTest {
 		MockHttpSession orderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/orderHistory")
 				.session(orderSession)
-				.param("orderList", "orderList"))
+				.param("totalPrice","3000")
+				.param("orderDate","2022-12-1")
+				.param("deliveryTime","23")
+				.param("destinationName","ebian")
+				.param("destinationEmail","ebina@gmail.com")
+				.param("destinationZipcode","111-1111")
+				.param("destinationAddress","テスト住所")
+				.param("destinationTel","0000-0000-0000")
+				.param("paymentMethod","1"))
 				.andExpect(view().name("order/order_history"));
 	}
 
