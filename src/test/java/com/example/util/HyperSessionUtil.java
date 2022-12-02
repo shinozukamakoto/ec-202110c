@@ -109,7 +109,7 @@ public class HyperSessionUtil {
 		order.setUserId(1);
 		order.setStatus(1);
 		order.setTotalPrice(300);
-		String date = "2019-05-01";
+		String date = "2022-12-10";
 		Date orderdate = Date.valueOf(date);
 		order.setOrderDate(orderdate);
 		order.setDestinationName("テストユーザー");
@@ -119,7 +119,7 @@ public class HyperSessionUtil {
 		order.setDestinationTel("0000-0000-0000");
 		order.setPaymentMethod(1);
 		order.setUser(user);
-		String datetime = "2019-05-01 09:02:03.123456789";
+		String datetime = "2022-12-10 09:02:03.123456789";
 		Timestamp timestamp = Timestamp.valueOf(datetime);
 		order.setDeliveryTime(timestamp);
 		
