@@ -267,11 +267,7 @@ class AdministratorItemControllerTest {
 	 		  
 	 	  }
 	 	  
-	 	  /*@Test
-	 	 @DisplayName("")
-	 	  void admiUpdate2() throws Exception {
-	 		
-	 	  }*/
+
 		 @Test
 		 @DisplayName("画像アップロード")
 			 void admiUpdate2() throws Exception {
