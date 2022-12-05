@@ -21,6 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.example.util.CsvDataSetLoader;
 import com.example.util.HyperSessionUtil;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 
 @SpringBootTest
@@ -162,15 +163,16 @@ class OrderControlerTest {
 
 	@Test
 	@DisplayName("注文履歴画面への遷移（成功）")
+	@DatabaseSetup("/Order/order")
 	void testOrderHistory01()throws Exception {
 		MockHttpSession orderSession = HyperSessionUtil.createUserIdAndOrderCompletionSession();
 		mockMvc.perform(get("/orderHistory")
 				.session(orderSession)
-				.param("totalPrice","3000")
-				.param("orderDate","2022-12-1")
-				.param("deliveryTime","23")
-				.param("destinationName","ebian")
-				.param("destinationEmail","ebina@gmail.com")
+				.param("totalPrice","300")
+				.param("orderDate","2022-12-04")
+				.param("deliveryTime","18")
+				.param("destinationName","テストユーザー")
+				.param("destinationEmail","test@sample")
 				.param("destinationZipcode","111-1111")
 				.param("destinationAddress","テスト住所")
 				.param("destinationTel","0000-0000-0000")

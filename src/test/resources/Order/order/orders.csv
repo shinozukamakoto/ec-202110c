@@ -1,0 +1,3 @@
+id,user_id,status,total_price,order_date,destination_name,destination_email,destination_zipcode,destination_address,destination_tel,delivery_time,payment_method
+1,1,1,300,2022-12-4,テストネーム,test@sample,000-0000,テスト住所,0000-0000-0000,2022-12-04,1
+2,2,2,500,2022-12-5,山田太郎,yamada@sample,123-4567,山田住所,1234-0000-0000,2022-12-05,2
