@@ -1,0 +1,3 @@
+id,item_id,order_id,quantity,size,sub_total
+1,1,1,1,M,300
+2,2,2,2,L,500
