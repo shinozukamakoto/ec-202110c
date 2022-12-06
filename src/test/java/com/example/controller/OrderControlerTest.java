@@ -150,7 +150,7 @@ class OrderControlerTest {
 				.session(userAndOrderSession)
 				.session(userAndOrderSession)
 				.param("totalPrice","3000")
-				.param("orderDate","2022-12-2")
+				.param("orderDate","2022-12-5")
 				.param("deliveryTime","18")
 				.param("destinationName","ebian")
 				.param("destinationEmail","ebina@gmail.com")
